@@ -9,24 +9,24 @@
       this.$element = $(element);
       this.maxWidth = options.maxWidth;
       this.maxHeight = options.maxHeight;
-      this.width = this.$element.width();//当前图片宽，非100%之后
-      this.height = this.$element.height();//当前图片高，非100%之后
-      this.maxWidthCenter = this.maxWidth/2;
-      this.maxHeightCenter = this.maxHeight/2;
+      this.width = this.$element.width(); //当前图片宽，非100%之后
+      this.height = this.$element.height(); //当前图片高，非100%之后
+      this.maxWidthCenter = this.maxWidth / 2;
+      this.maxHeightCenter = this.maxHeight / 2;
       this.options = $.extend({}, defaults, options);
       this.init();
     };
 
     Plugin.prototype.init = function() {
-      if(this.width > this.maxWidth && this.height > this.maxHeight){
-        this.$element.css('width','100%');
-        console.log(this.$element.height());
-        var moveHeight = -((this.$element.height()/2) - this.maxHeightCenter);
-        this.$element.css({
-          'position':'absolute',
-          'top': moveHeights
-        });
-      }
+      this.moveHeightWidth();
+    };
+    /*
+     * 分成多种情况
+     * 1.当图片宽高小于显示框时，应该先判断宽高哪个更远，宽里得远就扩大宽然后去掉多出来的高，反之扩大高去掉多余宽
+     * 2.当图片宽高大于显示框的时候，判断宽高哪个远，近的拉近然后去掉多余的
+     */
+    Plugin.prototype.moveHeightWidth = function() {
+
     };
 
     $.fn[pluginName] = function(options) {
@@ -45,9 +45,7 @@
 
   })(jQuery);
 
-  $('.js-cut-img img').refitImage({
-    maxWidth: 264,
-    maxHeight: 200
+  $('.img-box img').ClipImage({
+    maxWidth: 200,
+    maxHeight: 300
   });
-
-
